@@ -51,6 +51,29 @@ public class BoyerMooreSearcher {
 
         return table;
     }
+    public List<Integer> search(String text) {
+        List<Integer> result = new ArrayList<>();
+        int m = pattern.length();
+        int n = text.length();
+        int i = 0;
 
+        while (i <= n - m) {
+            int j = m - 1;
+            while (j >= 0 && pattern.charAt(j) == text.charAt(i + j)) {
+                j--;
+            }
+
+            if (j < 0) {
+                result.add(i);
+                i += goodSuffixTable[0];
+            } else {
+                int badCharShift = j - badCharTable[text.charAt(i + j)];
+                int goodSuffixShift = goodSuffixTable[j];
+                i += Math.max(1, Math.max(badCharShift, goodSuffixShift));
+            }
+        }
+
+        return result;
+    }
  
 }
