@@ -1,15 +1,20 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        String text = "Learning about algorithms is fun. Boyer-Moore algorithm is efficient. " +
+                "Boyer-Moore can find all occurrences. Boyer-Moore is popular.";
+        String pattern = "Boyer-Moore";
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+
+        BoyerMooreSearcher searcher = new BoyerMooreSearcher(pattern);
+        System.out.println("Searching for: \"" + pattern + "\"");
+        System.out.println("In text:\n" + text + "\n");
+
+        var matches = searcher.search(text);
+
+        if (matches.isEmpty()) {
+            System.out.println("No matches found.");
+        } else {
+            System.out.println("Pattern found at positions: " + matches);
         }
     }
 }
